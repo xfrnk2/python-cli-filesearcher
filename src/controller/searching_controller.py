@@ -15,6 +15,11 @@ class SearchingController:
                 target_name = input("찾고자 하는 파일의 이름 또는 포함하는 문자를 입력하세요.")
                 self.validate(target_name)
                 result = self.search(self.__root_dir, target_name)
+                if len(result) == 0:
+                    raise (illegal_argument_exception.IllegalArgumentException("[ERROR] 파일이 존재하지 않습니다."))
+                print(f"[탐색 결과] 총 {len(result)}건")
+                for file in result:
+                    print(file)
 
                 break
             except illegal_argument_exception.IllegalArgumentException as e:
