@@ -7,21 +7,21 @@ import os
 @click.group()
 def main():
     """
-    Simple CLI for querying books on Google Books by Oyetoke Toby
+    Simple CLI for finding files
     """
     pass
 
 @main.command()
 @click.argument('name')
-def find(name):
+def search(name):
     if not validate(name):
         return
 
     root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    results = search(root_dir, name)
+    results = search_by_name(root_dir, name)
     print_results(results)
 
-def search(start_dir, name):
+def search_by_name(start_dir, name):
     queue = deque()
     queue.append((start_dir, os.listdir(start_dir)))
     results = []
