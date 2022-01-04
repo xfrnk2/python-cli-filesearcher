@@ -2,6 +2,7 @@ from collections import deque
 import click
 import os
 
+search_start_path = "resource\\search_start_path.txt"
 
 
 @click.group()
@@ -53,6 +54,31 @@ def validate(value):
             print(f"사용이 불가능한 문자가 포함되어 있습니다. '{char}'")
             return False
     return True
+
+
+@main.command(short_help='"path [Path]", Set search-start-path')
+@click.argument('path')
+def path(path):
+    f = open(search_start_path, 'w')
+    f.write(path)
+    f.close()
+    print(f"[탐색 시작 위치] {path}")
+
+
+@main.command()
+def reset():
+    default_search_start_path = "C:\\Users\\rad87\\Documents\\programming\\python-cli-filesearcher"
+    f = open(search_start_path, 'w')
+    f.write(default_search_start_path)
+    f.close()
+    print(f"[탐색 시작 위치] {default_search_start_path}")
+
+
+@main.command('current_path', short_help='Show current search-start-path')
+def get_curruent_path():
+    """Current Search-Start-Path"""
+    print(open(search_start_path, 'r').readline())
+
 
 if __name__ == "__main__":
     main()
