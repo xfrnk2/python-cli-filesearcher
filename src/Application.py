@@ -1,6 +1,7 @@
-from collections import deque
-import click
 import os
+from collections import deque
+
+import click
 
 search_start_path = "resource\\search_start_path.txt"
 
@@ -12,6 +13,7 @@ def main():
     """
     pass
 
+
 @main.command(short_help='"search" [Name]" Search files')
 @click.argument('name')
 def search(name):
@@ -20,6 +22,7 @@ def search(name):
     start_dir = open("resource\\search_start_path.txt", 'r').readline()
     results = search_by_name(start_dir, name)
     print_results(start_dir, results)
+
 
 def search_by_name(start_dir, name):
     queue = deque()
@@ -34,6 +37,7 @@ def search_by_name(start_dir, name):
             elif name in temp:
                 results.append(temp)
     return results
+
 
 def print_results(start_dir, results):
     print(f"[탐색 시작 위치] {start_dir}")
@@ -67,7 +71,8 @@ def path(path):
 
 @main.command()
 def reset():
-    default_search_start_path = "C:\\Users\\rad87\\Documents\\programming\\python-cli-filesearcher"
+    default_search_start_path = \
+        "C:\\Users\\rad87\\Documents\\programming\\python-cli-filesearcher"
     f = open(search_start_path, 'w')
     f.write(default_search_start_path)
     f.close()
