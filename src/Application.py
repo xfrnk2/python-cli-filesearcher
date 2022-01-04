@@ -12,7 +12,7 @@ def main():
     """
     pass
 
-@main.command()
+@main.command(short_help='"search" [Name]" Search files')
 @click.argument('name')
 def search(name):
     if not validate(name):
