@@ -16,10 +16,9 @@ def main():
 def search(name):
     if not validate(name):
         return
-
-    root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    results = search_by_name(root_dir, name)
-    print_results(results)
+    start_dir = open("resource\\search_start_path.txt", 'r').readline()
+    results = search_by_name(start_dir, name)
+    print_results(start_dir, results)
 
 def search_by_name(start_dir, name):
     queue = deque()
@@ -35,7 +34,8 @@ def search_by_name(start_dir, name):
                 results.append(temp)
     return results
 
-def print_results(results):
+def print_results(start_dir, results):
+    print(f"[탐색 시작 위치] {start_dir}")
     count = len(results)
     print(f"[탐색 결과] {count}건")
     if count <= 0:
